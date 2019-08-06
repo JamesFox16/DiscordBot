@@ -1,0 +1,12 @@
+{
+    "name": "kenobi-bot",
+    "version": "1.0.0",
+    "description": "A Discord bot that would make Kenobi proud.",
+    "main": "bot.js",
+    "author": "James Fox",
+    "dependencies": {
+        "discord.io": "^2.5.3",
+        "discord.js": "^11.5.1",
+        "winston": "^3.2.1"
+    }
+}

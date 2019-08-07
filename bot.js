@@ -1,12 +1,13 @@
 var Discord = require('discord.js');
 var client = new Discord.Client();
 var auth = require('./auth.json');
+var snekfetch = require('snekfetch');
 
 client.on("ready", () => {
     console.log(`logged in as ${client.user.tag}!`);
 });
 
-client.on('message', msg => {
+client.on('message', async msg => {
 
     if (msg.content.toLowerCase() === 'hello help') {
         msg.channel.send({ embed: {
@@ -64,6 +65,73 @@ client.on('message', msg => {
             msg.channel.send(message, {
                 tts: false
             });
+        }
+    }
+
+    if (msg.content.toLowerCase() === 'owo') {
+        var message = "https://www.youtube.com/watch?v=h6DNdop6pD8";
+        msg.channel.send(message, {
+            tts: false
+        });
+    }
+
+    if (msg.content.toLowerCase() === 'vanguard') {
+        var message = "https://www.youtube.com/watch?v=s6jqZoztMSM";
+        msg.channel.send(message, {
+            tts: false
+        });
+    }
+
+    if (msg.content.toLowerCase() === 'cp fresh') {
+        try {
+            const { body } = await snekfetch
+                .get('https://www.reddit.com/r/copypasta.json?sort=top&t=week')
+                .query({ limit: 800 });
+            const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
+            if (!allowed.length){
+                return msg.channel.send('It seems we are out of fresh memes!, Try again later.');
+            }
+
+            const randomnumber = Math.floor(Math.random() * allowed.length)
+            var displayText;
+            if (allowed[randomnumber].data.selftext.length > 2000) {
+                displayText = allowed[randomnumber].data.selftext.subString(0,2000);
+            } else {
+                displayText = allowed[randomnumber].data.selftext;
+            }
+
+            const embed = new Discord.RichEmbed()
+            .setColor(0x00A2E8)
+            .setTitle(allowed[randomnumber].data.title)
+            .setDescription(displayText)
+            .setFooter(`👍${allowed[randomnumber].data.ups} | 💬${allowed[randomnumber].data.num_comments}`)
+            msg.channel.send(embed)
+        } catch (err) {
+            return console.log(err);
+        }
+    }
+
+    if (msg.content.toLowerCase() === 'surreal') {
+        try {
+            const { body } = await snekfetch
+                .get('https://www.reddit.com/r/surrealmemes.json?sort=top&t=week')
+                .query({ limit: 800 });
+            const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
+
+            if (!allowed.length){
+                return msg.channel.send('It seems we are out of fresh memes!, Try again later.');
+            }
+
+            const randomnumber = Math.floor(Math.random() * allowed.length)
+            const embed = new Discord.RichEmbed()
+            .setColor(0x00A2E8)
+            .setTitle(allowed[randomnumber].data.title)
+            .setDescription("u/" + allowed[randomnumber].data.author)
+            .setImage(allowed[randomnumber].data.url)
+            .setFooter(`👍${allowed[randomnumber].data.ups} | 💬${allowed[randomnumber].data.num_comments}`)
+            msg.channel.send(embed)
+        } catch (err) {
+            return console.log(err);
         }
     }
     

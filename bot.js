@@ -66,6 +66,12 @@ client.on('message', async msg => {
                 tts: false
             });
         }
+
+        if (parsed[1].toLowerCase() === 'minecraft' && parsed[2] !== null) {
+            msg.channel.send(`dear diary today I played Minecraft 1.14 with ${parsed[2]} and he got no diamonds. How do I tell him to stop using a wooden pick to mine ore woithout making him feel stupid?`, {
+                tts: true
+            });
+        }
     }
 
     if (msg.content.toLowerCase() === 'owo') {
@@ -89,7 +95,7 @@ client.on('message', async msg => {
                 .query({ limit: 800 });
             const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
             if (!allowed.length){
-                return msg.channel.send('It seems we are out of fresh memes!, Try again later.');
+                return msg.channel.send('It seems we are out of fresh pasta!');
             }
 
             const randomnumber = Math.floor(Math.random() * allowed.length)
@@ -119,7 +125,7 @@ client.on('message', async msg => {
             const allowed = msg.channel.nsfw ? body.data.children : body.data.children.filter(post => !post.data.over_18);
 
             if (!allowed.length){
-                return msg.channel.send('It seems we are out of fresh memes!, Try again later.');
+                return msg.channel.send('It seems we are out of enslaved memes!');
             }
 
             const randomnumber = Math.floor(Math.random() * allowed.length)

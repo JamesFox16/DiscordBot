@@ -25,10 +25,6 @@ client.on('message', async msg => {
             {
                 name: 'cp battalion [name]',
                 value: 'tts copy-pasta about playing battalion. replace [name] with a name. Do not include the [] in the text.'
-            },
-            {
-                name: 'cp ninja',
-                value: 'Watch out when you talk to ninja.'
             }],
             timestamp: new Date(),
             footer: {
@@ -51,13 +47,6 @@ client.on('message', async msg => {
             });
         }
 
-        if (parsed[1].toLowerCase() === 'ninja') {
-            var message = 'THE FUCK YOU SAY TO ME YOU LITTLE SHIT? HA HA HA HA HA HA HOW ARE YOU NOT IN FUCKING SCHOOL? YOU KISS YOUR MOTHER WITH THAT MOUTH?';
-            msg.channel.send(message, {
-                tts: true
-            });
-        }
-
         if (parsed[1].toLowerCase() === 'ocean' && parsed[2].toLowerCase() === 'man') {
             var message = 'OCEAN MAN 🌊 😍 Take me by the hand ✋ lead me to the land that you understand 🙌\n'+
             '🌊 OCEAN MAN 🌊 😍 The voyage 🚲 to the corner of the 🌎 globe is a real trip 👌 🌊 OCEAN MAN 🌊\n'+
@@ -68,7 +57,7 @@ client.on('message', async msg => {
         }
 
         if (parsed[1].toLowerCase() === 'minecraft' && parsed[2] !== null) {
-            msg.channel.send(`dear diary today I played Minecraft 1.14 with ${parsed[2]} and he got no diamonds. How do I tell him to stop using a wooden pick to mine ore woithout making him feel stupid?`, {
+            msg.channel.send(`dear diary today I played Minecraft with ${parsed[2]} and he got no diamonds. How do I tell him to stop using a wooden pick to mine ore woithout making him feel stupid?`, {
                 tts: true
             });
         }
